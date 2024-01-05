@@ -3,7 +3,7 @@ from bcc import BPF
 from time import sleep
 program = r"""
 BPF_HASH(counter_table);
-int execve_hello(void *ctx){
+int write_hello(void *ctx){
     u64 uid;
     u64 counter = 0;
     u64 *p;
@@ -13,7 +13,7 @@ int execve_hello(void *ctx){
     if (p != 0){
         counter = *p;
     }
-    counter++;
+    counter--;
     counter_table.update(&uid, &counter);
     return 0;
 }
@@ -33,10 +33,12 @@ int openat_hello(void *ctx){
 }
 """
 b = BPF(text=program)
-execve = b.get_syscall_fnname("execve")
-b.attach_kprobe(event=execve, fn_name="execve_hello")
+# execve = b.get_syscall_fnname("execve")
+# b.attach_kprobe(event=execve, fn_name="execve_hello")
 openat = b.get_syscall_fnname("openat")
 b.attach_kprobe(event=openat,fn_name="openat_hello")
+write_syscall = b.get_syscall_fnname("write")
+b.attach_kprobe(event=write_syscall, fn_name="write_hello")
 while True:
     sleep(2)
     s = ""
