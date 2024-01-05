@@ -86,6 +86,7 @@ eBPF中可以使用perf buffer来存储kernel信息，在更高版本中还支�
 使用perf buffer是一种更为灵活的做法，因为可以支持用户自定义的结构体，不过写法上比hash map的稍微复杂一些，下面写个模板
 
 ```python
+
 program = r"""
 BPF_PERF_OUTPUT(output); //定义用户和内核之间传递数据的变量名
 struct user_struct {
@@ -124,7 +125,7 @@ chatGPT的解释是
 > 尾部调用的主要优点是减少内存使用，尤其对于递归算法来说，可以避免栈溢出。
 > 例如，在下面的代码中，函数 functionA 中的最后一个操作是调用函数 functionB，这就是尾部调用：
 
-```c
+```python
 
 def functionA(n):
     if n == 0:
