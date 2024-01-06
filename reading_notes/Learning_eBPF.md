@@ -120,6 +120,8 @@ while True:
 
 tail calls 中文称为尾部调用，在eBPF中它的功能是执行别的eBPF程序然后取代执行的上下文。 
 
+尾部调用的优点是防止多重函数调用引起的栈堆积。
+
 chatGPT的解释是
 > 尾部调用是指函数的最后一个动作是调用另一个函数。具体来说，被调用的函数是当前函数的返回值。在尾部调用中，没有其他的操作需要执行，因此可以立即释放当前函数的栈帧，这样能够减少递归调用或者连续调用函数时所使用的内存空间。
 > 尾部调用的主要优点是减少内存使用，尤其对于递归算法来说，可以避免栈溢出。
@@ -136,3 +138,8 @@ def functionA(n):
 def functionB(n):
     return n * functionA(n-1)
 ```
+
+在BCC中，使用`prog_array_map.call(ctx,index)`的方式进行尾部调用
+
+prog_array_map是bpf map中的BPF_MAP_TYPE_PROG_ARRAY类型，用于记录syscall和它要执行的尾部调用程序。
+
