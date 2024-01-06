@@ -229,4 +229,8 @@ bpftool net list
 bpf_printk("string is %s",mystr);
 ```
 
-`"string is %s"` 。
+`"string is %s"` 就是一个map，它是只读的 。
+
+ ![image](https://github.com/upaskun/eBPF-learning_notes/assets/82031259/a74c573e-6090-4f10-9e01-c6ee8e313315)
+
+## 
