@@ -233,4 +233,12 @@ bpf_printk("string is %s",mystr);
 
  ![image](https://github.com/upaskun/eBPF-learning_notes/assets/82031259/a74c573e-6090-4f10-9e01-c6ee8e313315)
 
-## 
+## BPF的一些概念
+
+BPF通过为BPF程序和MAP分配文件描述符，方便引用计数，也防止执行完程序之后就退出-> 更好的进行资源管理
+
+### BPF Links
+
+BPF Link在BPF程序和它附加的事件之间提供了一层额外的抽象。每创建一个BPF link就会增加一个BPF程序的计数引用。这意味着，即使被加载到内核的用户空间进程停止了，程序仍然可能存在。
+
+
