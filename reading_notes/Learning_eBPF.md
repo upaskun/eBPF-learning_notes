@@ -241,4 +241,16 @@ BPF通过为BPF程序和MAP分配文件描述符，方便引用计数，也防�
 
 BPF Link在BPF程序和它附加的事件之间提供了一层额外的抽象。每创建一个BPF link就会增加一个BPF程序的计数引用。这意味着，即使被加载到内核的用户空间进程停止了，程序仍然可能存在。
 
+### 追踪BPF程序的系统调用 
+
+```bash
+strace -e bpf ./<bpf_prog>
+```
+
+### 从Map中读信息
+
+```bash
+bpf bpftool map dump name <mapname>
+```
+
 
