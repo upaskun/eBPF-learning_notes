@@ -253,4 +253,5 @@ strace -e bpf ./<bpf_prog>
 bpf bpftool map dump name <mapname>
 ```
 
+## CO-RE, BTF, Libbpf
 
